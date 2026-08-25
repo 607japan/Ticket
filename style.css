@@ -1,0 +1,742 @@
+* {
+    box-sizing: border-box;
+}
+
+
+body {
+    margin: 0;
+
+    background-image: url("poster.png");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+
+    color: #171717;
+
+    font-family:
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+}
+
+
+.container {
+    width: min(
+        960px,
+        calc(100% - 24px)
+    );
+
+    margin: auto;
+}
+
+
+.card {
+    background: white;
+
+    border-radius: 20px;
+
+    padding: 22px;
+
+    margin: 20px 0;
+
+    box-shadow:
+        0 8px 30px
+        rgba(0, 0, 0, 0.08);
+}
+
+
+.intro-card {
+    text-align: center;
+}
+
+
+.intro-card h1 {
+    margin-bottom: 8px;
+}
+
+
+.intro-card p {
+    margin: 0;
+
+    color: #666;
+}
+
+
+/* =========================
+   Legend
+========================= */
+
+.legend {
+    display: flex;
+
+    gap: 18px;
+
+    margin: 18px 0;
+
+    flex-wrap: wrap;
+
+    font-size: 14px;
+}
+
+
+.legend span {
+    display: flex;
+
+    align-items: center;
+
+    gap: 6px;
+}
+
+
+.legend-seat {
+    display: inline-block;
+
+    width: 16px;
+    height: 16px;
+
+    border-radius: 5px;
+
+    flex-shrink: 0;
+}
+
+.legend-seat.available {
+    background: #bbf7d0;
+}
+
+.legend-seat.selected {
+    background: #111827;
+}
+
+.legend-seat.locked {
+    background: #f59e0b;
+}
+
+.legend-seat.sold {
+    background: #ef4444;
+}
+
+
+/* =========================
+   Stage
+========================= */
+
+.stage {
+    width: 70%;
+
+    margin:
+        0 auto 28px;
+
+    background: #20242c;
+
+    color: white;
+
+    text-align: center;
+
+    padding: 12px;
+
+    border-radius:
+        0 0 20px 20px;
+
+    font-weight: 800;
+}
+
+
+/* =========================
+   Seat Map
+========================= */
+
+#seatMap {
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 50px;
+
+    width: 100%;
+}
+
+
+.side {
+    min-width: 0;
+}
+
+
+.side-title {
+    text-align: center;
+
+    font-weight: 800;
+
+    margin-bottom: 10px;
+}
+
+
+.seat-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(10, 1fr);
+
+    gap: 5px;
+
+    width: 100%;
+}
+
+
+/* =========================
+   Seats
+========================= */
+
+.seat {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+
+    border: none;
+    border-radius: 7px;
+
+    background: #bbf7d0;
+    color: #111827;
+
+    font-size: 10px;
+    font-weight: 800;
+
+    cursor: pointer;
+
+    padding: 0;
+    line-height: 1;
+
+    transition:
+        transform 0.1s,
+        opacity 0.1s,
+        background 0.1s;
+}
+
+
+/* ว่าง */
+
+.seat.available {
+    background: #bbf7d0;
+    color: #111827;
+}
+
+
+/* เลือกอยู่ */
+
+.seat.selected {
+    background: #111827 !important;
+    color: white !important;
+
+    opacity: 1 !important;
+}
+
+
+/* กำลังจอง */
+
+.seat.locked {
+    background: #f59e0b !important;
+    color: white !important;
+
+    cursor: not-allowed;
+}
+
+
+/* จองแล้ว */
+
+.seat.sold {
+    background: #ef4444 !important;
+    color: white !important;
+
+    cursor: not-allowed;
+}
+
+
+/* Hover เฉพาะที่ว่าง */
+
+.seat.available:hover:not(:disabled) {
+    transform: scale(1.08);
+}
+
+
+/* ป้องกัน disabled ทำให้สีจาง */
+
+.seat:disabled {
+    opacity: 1;
+}
+
+/* =========================
+   Summary
+========================= */
+
+.summary {
+    display: flex;
+
+    justify-content:
+        space-between;
+
+    align-items: center;
+
+    gap: 20px;
+
+    border-top:
+        1px solid #eeeeee;
+
+    margin-top: 24px;
+
+    padding-top: 18px;
+
+    font-size: 18px;
+}
+
+
+.summary small {
+    display: block;
+
+    color: #666;
+
+    margin-bottom: 4px;
+}
+
+
+.summary strong {
+    font-size: 18px;
+}
+
+
+.total {
+    text-align: right;
+}
+
+
+/* =========================
+   Buttons
+========================= */
+
+.primary {
+    width: 100%;
+
+    min-height: 60px;
+
+    margin-top: 20px;
+
+    padding: 14px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background: #111827;
+
+    color: white;
+
+    font-size: 20px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s,
+        opacity 0.2s;
+}
+
+
+.primary:hover:not(:disabled) {
+    transform:
+        translateY(-2px);
+}
+
+
+.primary:disabled {
+    opacity: 0.5;
+
+    cursor: not-allowed;
+}
+
+
+/* =========================
+   Payment
+========================= */
+
+.timer-box {
+    background: #fff7ed;
+
+    color: #9a3412;
+
+    padding: 14px;
+
+    border-radius: 12px;
+
+    text-align: center;
+
+    margin: 15px 0;
+}
+
+
+.timer-box strong {
+    display: block;
+
+    font-size: 30px;
+
+    margin-top: 3px;
+}
+
+
+.payment-total {
+    display: flex;
+
+    justify-content:
+        space-between;
+
+    align-items: center;
+
+    background: #f8fafc;
+
+    padding: 15px;
+
+    border-radius: 12px;
+
+    font-size: 18px;
+}
+
+
+.payment-total strong {
+    font-size: 22px;
+}
+
+
+/* =========================
+   QR
+========================= */
+
+.qr-box {
+    text-align: center;
+
+    margin: 25px 0;
+}
+
+
+.qr-image {
+    display: block;
+
+    width:
+        min(280px, 80vw);
+
+    aspect-ratio: 1;
+
+    object-fit: contain;
+
+    margin: auto;
+
+    border-radius: 12px;
+
+    background: white;
+}
+
+
+.qr-box p {
+    margin-top: 12px;
+
+    color: #666;
+}
+
+
+/* =========================
+   Form
+========================= */
+
+#bookingForm {
+    margin-top: 20px;
+}
+
+
+#bookingForm label {
+    display: block;
+
+    margin-top: 18px;
+
+    font-weight: 700;
+}
+
+
+#bookingForm input {
+    display: block;
+
+    width: 100%;
+
+    margin-top: 7px;
+
+    padding: 13px;
+
+    border:
+        1px solid #d5d5d5;
+
+    border-radius: 10px;
+
+    font: inherit;
+
+    background: white;
+}
+
+
+#bookingForm input:focus {
+    outline:
+        2px solid #111827;
+
+    outline-offset: 1px;
+}
+
+
+/* =========================
+   Slip
+========================= */
+
+.slip-label span {
+    display: block;
+
+    font-size: 20px;
+
+    font-weight: 800;
+
+    margin-bottom: 8px;
+}
+
+
+.slip-label input[type="file"] {
+    padding: 15px;
+
+    font-size: 16px;
+
+    cursor: pointer;
+}
+
+
+.submit-button {
+    margin-top: 25px;
+
+    min-height: 65px;
+
+    font-size: 21px;
+}
+
+
+/* =========================
+   Error
+========================= */
+
+.result {
+    margin-top: 15px;
+
+    padding: 14px;
+
+    background: #fee2e2;
+
+    color: #b91c1c;
+
+    border-radius: 10px;
+
+    font-weight: 600;
+
+    white-space: pre-line;
+}
+
+
+/* =========================
+   Ticket
+========================= */
+
+.ticket {
+    max-width: 650px;
+
+    margin: auto;
+
+    text-align: center;
+
+    padding: 10px;
+}
+
+
+.ticket h2 {
+    font-size: 28px;
+
+    margin-top: 0;
+
+    margin-bottom: 20px;
+}
+
+
+.ticket-image {
+    display: block;
+
+    width: 100%;
+
+    max-width: 600px;
+
+    margin: auto;
+
+    border-radius: 16px;
+
+    object-fit: contain;
+}
+
+
+.ticket-info {
+    margin-top: 20px;
+
+    background: #f8fafc;
+
+    border-radius: 14px;
+
+    overflow: hidden;
+
+    text-align: left;
+}
+
+
+.ticket-row {
+    display: flex;
+
+    justify-content:
+        space-between;
+
+    align-items: center;
+
+    gap: 20px;
+
+    padding: 16px 18px;
+
+    border-bottom:
+        1px solid #e5e7eb;
+}
+
+
+.ticket-row:last-child {
+    border-bottom: none;
+}
+
+
+.ticket-row span {
+    color: #666;
+
+    font-weight: 600;
+}
+
+
+.ticket-row strong {
+    font-size: 18px;
+
+    text-align: right;
+}
+
+
+.ticket-note {
+    margin-top: 20px;
+
+    color: #666;
+
+    font-size: 14px;
+}
+
+
+/* =========================
+   Hidden
+========================= */
+
+.hidden {
+    display: none !important;
+}
+
+
+/* =========================
+   Mobile
+========================= */
+
+@media (max-width: 650px) {
+
+    .container {
+        width: calc(100% - 10px);
+    }
+
+    .card {
+        padding: 10px;
+        border-radius: 14px;
+    }
+
+    #seatMap {
+        grid-template-columns: 1fr 1fr;
+        gap: 6px;
+    }
+
+    .side {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .side-title {
+        font-size: 13px;
+        margin-bottom: 7px;
+    }
+
+    .seat-grid {
+        grid-template-columns: repeat(10, 1fr);
+        gap: 2px;
+    }
+
+    .seat {
+        width: 100%;
+        min-width: 0;
+
+        padding: 0;
+
+        aspect-ratio: 1 / 1;
+
+        border-radius: 3px;
+
+        font-size: 5px;
+        font-weight: 700;
+
+        line-height: 1;
+    }
+
+    .seat.available:hover:not(:disabled) {
+        transform: none;
+    }
+
+    .stage {
+        width: 85%;
+
+        margin-bottom: 15px;
+        padding: 8px;
+
+        font-size: 13px;
+    }
+
+    .summary {
+        font-size: 14px;
+
+        gap: 8px;
+
+        margin-top: 15px;
+        padding-top: 12px;
+    }
+
+    .summary strong {
+        font-size: 14px;
+    }
+
+    #continueBtn {
+        min-height: 50px;
+        font-size: 17px;
+    }
+
+    .ticket-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+
+    .ticket-row strong {
+        text-align: left;
+    }
+}
